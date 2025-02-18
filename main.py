@@ -152,8 +152,18 @@ def add_user(message):
                 # Create copies of bgmi, sahil files for the new user
                 user_bgmi_path = f'bgmi{user_id}'
                 user_daksh_path = f'daksh{user_id}'
-                shutil.copy(ORIGINAL_BGMI_PATH, user_bgmi_path)
-                shutil.copy(ORIGINAL_DAKSH_PATH, user_venom_path)
+                
+if os.path.exists(ORIGINAL_BGMI_PATH):
+    shutil.copy(ORIGINAL_BGMI_PATH, user_bgmi_path)
+else:
+    bot.send_message(message.chat.id, "⚠️ bgmi file not found at the specified path.")
+
+                
+if os.path.exists(ORIGINAL_DAKSH_PATH):
+    shutil.copy(ORIGINAL_DAKSH_PATH, user_venom_path)
+else:
+    bot.send_message(message.chat.id, "⚠️ sahil file not found at the specified path.")
+
 
                 response = f"User {user_id} added successfully for {duration} days by {admin_username} 👍. Balance deducted: {cost} Rs. Remaining balance: {admin_balances[str(message.chat.id)]} Rs."
             else:
@@ -173,7 +183,12 @@ def add_user(message):
                 # Create copies of bgmi,sahil files for the new user
                 user_bgmi_path = f'bgmi{user_id}'              
                 user_sahil_path = f'venom{user_id}'
-                shutil.copy(ORIGINAL_BGMI_PATH, user_bgmi_path)
+                
+if os.path.exists(ORIGINAL_BGMI_PATH):
+    shutil.copy(ORIGINAL_BGMI_PATH, user_bgmi_path)
+else:
+    bot.send_message(message.chat.id, "⚠️ bgmi file not found at the specified path.")
+
                 shutil.copy(ORIGINAL_VENOM_PATH, user_venom_path)
 
                 response = f"User {user_id} added successfully for {hours} hours by {admin_username} 👍. Balance deducted: {cost} Rs. Remaining balance: {admin_balances[str(message.chat.id)]} Rs."
@@ -289,7 +304,15 @@ def handle_attack_details(message):
     if user_id in allowed_user_ids:
         try:
             target, port, duration = message.text.split()
-            duration = int(duration)
+            
+try:
+    duration_str = args[2] if len(args) == 3 else args[3]
+    import re
+    duration = int(re.sub(r'\D', '', duration_str))  # Remove non-digit chars
+except ValueError:
+    bot.send_message(message.chat.id, "❌ Invalid duration format. Please use numbers only.")
+    return
+
 
             # Restrict attack duration for normal users
             MAX_DURATION = 240  # Set maximum duration (in seconds) for Normal users
