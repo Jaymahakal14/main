@@ -152,13 +152,13 @@ def add_user(message):
                 # Create copies of bgmi, sahil files for the new user
                 user_bgmi_path = f'bgmi{user_id}'
                 user_daksh_path = f'daksh{user_id}'
-                
+
 if os.path.exists(ORIGINAL_BGMI_PATH):
     shutil.copy(ORIGINAL_BGMI_PATH, user_bgmi_path)
 else:
     bot.send_message(message.chat.id, "⚠️ bgmi file not found at the specified path.")
 
-                
+
 if os.path.exists(ORIGINAL_DAKSH_PATH):
     shutil.copy(ORIGINAL_DAKSH_PATH, user_venom_path)
 else:
@@ -183,7 +183,7 @@ response = f"User {user_id} added successfully for {duration} days by {admin_use
                 # Create copies of bgmi,sahil files for the new user
                 user_bgmi_path = f'bgmi{user_id}'              
                 user_sahil_path = f'venom{user_id}'
-                
+
 if os.path.exists(ORIGINAL_BGMI_PATH):
     shutil.copy(ORIGINAL_BGMI_PATH, user_bgmi_path)
 else:
