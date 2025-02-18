@@ -123,7 +123,7 @@ def send_welcome(message):
     btn_attack = types.KeyboardButton('🚀 Attack')
     btn_info = types.KeyboardButton('ℹ️ My Info')
     markup.add(btn_attack, btn_info)
-    
+
     bot.send_message(message.chat.id, welcome_message, reply_markup=markup)
 
 # Bot command handlers
@@ -152,13 +152,13 @@ def add_user(message):
                 # Create copies of bgmi, sahil files for the new user
                 user_bgmi_path = f'bgmi{user_id}'
                 user_daksh_path = f'daksh{user_id}'
-                
+
 if os.path.exists(ORIGINAL_BGMI_PATH):
     shutil.copy(ORIGINAL_BGMI_PATH, user_bgmi_path)
 else:
     bot.send_message(message.chat.id, "⚠️ bgmi file not found at the specified path.")
 
-                
+
 if os.path.exists(ORIGINAL_DAKSH_PATH):
     shutil.copy(ORIGINAL_DAKSH_PATH, user_venom_path)
 else:
@@ -183,7 +183,7 @@ else:
                 # Create copies of bgmi,sahil files for the new user
                 user_bgmi_path = f'bgmi{user_id}'              
                 user_sahil_path = f'venom{user_id}'
-                
+
 if os.path.exists(ORIGINAL_BGMI_PATH):
     shutil.copy(ORIGINAL_BGMI_PATH, user_bgmi_path)
 else:
@@ -304,7 +304,7 @@ def handle_attack_details(message):
     if user_id in allowed_user_ids:
         try:
             target, port, duration = message.text.split()
-            
+
 try:
     duration_str = args[2] if len(args) == 3 else args[3]
     import re
